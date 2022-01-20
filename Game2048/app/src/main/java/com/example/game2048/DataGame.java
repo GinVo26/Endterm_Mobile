@@ -25,6 +25,10 @@ public class DataGame{
         dataGame = new DataGame();
     }
 
+    public DataGame() {
+        dataGame = this;
+    }
+
     public static DataGame getDataGame() {
         return dataGame;
     }
@@ -112,7 +116,7 @@ public class DataGame{
                             continue;
                         } else {
                             if (nextnumit == numit) {
-                                Array2C[i][j] *= 2;
+                                Array2C[i][j] = numit * 2;
                                 Array2C[i][k] = 0;
                                 score += Array2C[i][j];
                                 check = true;
@@ -144,6 +148,7 @@ public class DataGame{
             }
         }
         if (check == true) randomNumber();
+        //checkComplete();
         chuyenDoi();
     }
 
@@ -163,7 +168,7 @@ public class DataGame{
                             continue;
                         } else {
                             if (nextnumit == numit) {
-                                Array2C[i][j] *= 2;
+                                Array2C[i][j] = numit * 2;
                                 Array2C[i][k] = 0;
                                 score += Array2C[i][j];
                                 check = true;
@@ -195,6 +200,7 @@ public class DataGame{
             }
         }
         if (check == true) randomNumber();
+        //checkComplete();
         chuyenDoi();
     }
 
@@ -214,7 +220,7 @@ public class DataGame{
                             continue;
                         } else {
                             if (nextnumit == numit) {
-                                Array2C[j][i] *= 2;
+                                Array2C[j][i] = numit * 2;
                                 Array2C[k][i] = 0;
                                 score += Array2C[j][i];
                                 check = true;
@@ -246,6 +252,7 @@ public class DataGame{
             }
         }
         if (check == true) randomNumber();
+        //checkComplete();
         chuyenDoi();
     }
 
@@ -265,7 +272,7 @@ public class DataGame{
                             continue;
                         } else {
                             if (nextnumit == numit) {
-                                Array2C[j][i] *= 2;
+                                Array2C[j][i] = numit * 2;
                                 Array2C[k][i] = 0;
                                 score += Array2C[j][i];
                                 check = true;
@@ -297,6 +304,51 @@ public class DataGame{
             }
         }
         if (check == true) randomNumber();
+        //checkComplete();
         chuyenDoi();
+    }
+
+    public boolean checkFor2048(){
+        for (int i = 0 ; i < 4 ; i++){
+            for ( int j = 0 ; j < 4 ; j++){
+                if (Array2C[i][j] == 2048){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public boolean checkBoardFull(){
+        for (int i = 0 ; i < 4 ; i++){
+            for ( int j = 0 ; j < 4 ; j++){
+                if (Array2C[i][j] == 0){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    public boolean checkHasMove(){
+        for (int i = 0 ; i < 4 ; i++){
+            for ( int j = 0 ; j < 4 ; j++){
+                if (i == 0){
+                    if ( j != 0){
+                        if (Array2C[i][j] == Array2C[i][j-1]){
+                            return true;
+                        }
+                    }
+                } else {
+                    if ( j != 0){
+                        if (Array2C[i][j] == Array2C[i][j-1]){
+                            return true;
+                        }
+                    }
+                    if (Array2C[i][j] == Array2C[i-1][j]){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }

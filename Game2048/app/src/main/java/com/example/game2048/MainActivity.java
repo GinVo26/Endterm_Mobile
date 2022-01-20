@@ -108,20 +108,25 @@ public class MainActivity extends AppCompatActivity {
                                 DataGame.getDataGame().slideLeft();
                                 numItemAdapter.notifyDataSetChanged();
                                 updateScore();
+                                checkState();
                             }else{
                                 DataGame.getDataGame().slideRight();
                                 numItemAdapter.notifyDataSetChanged();
                                 updateScore();
+                                checkState();
                             }
                         }else{
                             if (event.getY() < y){
                                 DataGame.getDataGame().slideDown();
                                 numItemAdapter.notifyDataSetChanged();
                                 updateScore();
+                                checkState();
+
                             }else{
                                 DataGame.getDataGame().slideUp();
                                 numItemAdapter.notifyDataSetChanged();
                                 updateScore();
+                                checkState();
                             }
                         }
                 }
@@ -171,6 +176,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void updateScore(){
         nowScore.setText(String.valueOf(DataGame.getDataGame().getScore()));
+    }
+    public void checkState(){
+        if (DataGame.getDataGame().checkFor2048()){
+            Toast.makeText(MainActivity.this, "You Win ^_^", Toast.LENGTH_SHORT).show();
+        } else if (DataGame.getDataGame().checkBoardFull()){
+            if (!(DataGame.getDataGame().checkHasMove())){
+                Toast.makeText(MainActivity.this,"\t\t\tYou Lose :(( \nPlease New Game!!!", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
 
